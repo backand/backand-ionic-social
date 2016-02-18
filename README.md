@@ -7,7 +7,9 @@ Create mobile application with [ionic](http://www.ionicframework.com) and [backa
     cd myApp
 
 2 - Install [InAppBrowser](https://cordova.apache.org/docs/en/3.0.0/cordova/inappbrowser/inappbrowser.html) cordova plugin.
+    
     cordova plugin add cordova-plugin-inappbrowser
+    
     ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git
 
 
