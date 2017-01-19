@@ -11,7 +11,7 @@ angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controll
      */
     .config(function (BackandProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
         // change here to your appName
-        BackandProvider.setAppName('ionicstarter');
+        BackandProvider.setAppName('ionicstartertest1');
 
         BackandProvider.setSignUpToken('6dad7dc0-fe72-4a4f-9716-3e75f3e25125');
 
