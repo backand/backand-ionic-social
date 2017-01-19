@@ -1,0 +1,22 @@
+{
+  "name": "backand-angular1-sdk",
+  "description": "Backand SDK for Angular 1",
+  "version": "1.9.2",
+  "main": [
+    "dist/backand.provider.min.js"
+  ],
+  "ignore": [
+    "bower/*",
+    "bower",
+    "src",
+    "package.json",
+    "gulpfile.js"
+  ],
+  "homepage": "https://github.com/backand/angular1-sdk",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "angular": "^1.6.1",
+    "backand-vanilla-sdk": "1.0.5"
+  }
+}

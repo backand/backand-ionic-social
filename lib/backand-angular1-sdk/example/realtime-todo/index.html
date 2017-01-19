@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Backand angularjs1bknd-sdk</title>
+   <meta charset="utf-8">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body ng-controller="DemoCtrl" class="container" ng-app="myTodoApp" ng-init="readList()">
+  <h2>Backand Real-time Todo Example</h2>
+  <h4>Try it by opening two browsers and update / add / remove a TODO</h4>
+  <br/>
+
+  <!-- Todos input -->
+  <form role="form" ng-submit="create({'description': description})">
+    <div class="row">
+      <div class="input-group">
+        <input type="text" ng-model="description" placeholder="What needs to be done?" class="form-control">
+        <span class="input-group-btn">
+          <input type="submit" class="btn btn-primary" value="Add" ng-disabled="!description">
+        </span>
+      </div>
+    </div>
+  </form>
+  <br/>
+  <!-- Todos list -->
+  <div>
+    <p  class="input-group"
+        ng-repeat="todo in todos | orderBy:'-id'"
+        style="padding:5px 10px; cursor: move;"
+        ng-class="{'todo-completed': todo.completed}">
+      <span class="input-group-btn">
+        <button class="btn"><input type="checkbox" class="btn btn-primary" ng-model="todo.completed" ng-click="update(todo)"></button>
+      </span>
+      <input  type="text"
+              ng-disabled="todo.completed"
+              ng-model="todo.description"
+              ng-change="update(todo)"
+              ng-model-options="{updateOn: 'blur'}"
+              class="form-control" >
+      <span class="input-group-btn">
+        <button class="btn btn-danger" ng-click="delete(todo)" aria-label="Remove">X</button>
+      </span>
+    </p>
+  </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+<script src="../../node_modules/@backand/bkndvanilla-sdk/dist/backand.min.js"></script>
+<script src="../../dist/backand.provider.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
