@@ -70,9 +70,6 @@ angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controll
                 StatusBar.styleLightContent();
             }
 
-
-            var isMobile = !(ionic.Platform.platforms[0] == "browser");
-            Backand.setIsMobile(isMobile);
         });
 
         function unauthorized() {
@@ -92,9 +89,6 @@ angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controll
             if (toState.name == 'tab.login') {
                 signout();
             }
-            // else if (toState.name != 'tab.login' && Backand.getToken() === undefined) {
-            //     unauthorized();
-            // }
         });
 
     });
