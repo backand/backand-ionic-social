@@ -1,5 +1,4 @@
 # Dependency directory
-lib/**
 .idea
 .DS_Store
 .DS_Store?
