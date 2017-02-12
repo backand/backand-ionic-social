@@ -1,0 +1,11 @@
+{
+  "name": "My Backand App",
+  "short_name": "My Backand App",
+  "start_url": "index.html",
+  "display": "tabs",
+  "icons": [{
+    "src": "icon.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}

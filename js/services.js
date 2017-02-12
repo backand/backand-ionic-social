@@ -1,181 +1,75 @@
 angular.module('SimpleRESTIonic.services', [])
 
-    .service('APIInterceptor', function ($rootScope, $q) {
-        var service = this;
+  .service('APIInterceptor', function ($rootScope, $q) {
+    var service = this;
 
-        service.responseError = function (response) {
-            if (response.status === 401) {
-                $rootScope.$broadcast('unauthorized');
-            }
-            return $q.reject(response);
-        };
-    })
+    service.responseError = function (response) {
+      if (response.status === 401) {
+        $rootScope.$broadcast('unauthorized');
+      }
+      return $q.reject(response);
+    };
+  })
 
-    .service('ItemsModel', function ($http, Backand) {
-        var service = this,
-            baseUrl = '/1/objects/',
-            objectName = 'items/';
+  .service('ItemsModel', function ($http, Backand) {
+    var service = this,
+        objectName = 'items';
 
-        function getUrl() {
-            return Backand.getApiUrl() + baseUrl + objectName;
-        }
+    service.all = function () {
+      return Backand.object.getList(objectName);
+    };
 
-        function getUrlForId(id) {
-            return getUrl() + id;
-        }
+    service.fetch = function (id) {
+      return Backand.object.getOne(objectName,id);
+    };
 
-        service.all = function () {
-            return $http.get(getUrl());
-        };
+    service.create = function (object) {
+      return Backand.object.create(objectName,object);
+    };
 
-        service.fetch = function (id) {
-            return $http.get(getUrlForId(id));
-        };
+    service.update = function (id, object) {
+      return Backand.object.update(objectName, id, object);
+    };
 
-        service.create = function (object) {
-            return $http.post(getUrl(), object);
-        };
+    service.delete = function (id) {
+      return Backand.object.remove(objectName, id);
+    };
+  })
 
-        service.update = function (id, object) {
-            return $http.put(getUrlForId(id), object);
-        };
+  .service('LoginService', function (Backand) {
+    var service = this;
 
-        service.delete = function (id) {
-            return $http.delete(getUrlForId(id));
-        };
-    })
+    service.signin = function (email, password) {
+      //call Backand for sign in
+      return Backand.signin(email, password);
+    };
 
-    .service('LoginService', function (Backand) {
-        var service = this;
+    service.anonymousLogin= function(){
+      // don't have to do anything here,
+      // because we set app token att app.js
+    };
 
-        service.signin = function (email, password, appName) {
-            //call Backand for sign in
-            return Backand.signin(email, password);
-        };
+    service.socialSignin = function (provider) {
+      return Backand.socialSignin(provider);
+    };
 
-        service.anonymousLogin= function(){
-            // don't have to do anything here,
-            // because we set app token att app.js
-        }
+    service.socialSignup = function (provider) {
+      return Backand.socialSignup(provider);
 
-        service.socialSignIn = function (provider) {
-            return Backand.socialSignIn(provider);
-        };
+    };
 
-        service.socialSignUp = function (provider) {
-            return Backand.socialSignUp(provider);
+    service.signout = function () {
+      return Backand.signout();
+    };
 
-        };
-
-        service.signout = function () {
-            return Backand.signout();
-        };
-
-        service.signup = function(firstName, lastName, email, password, confirmPassword){
-            return Backand.signup(firstName, lastName, email, password, confirmPassword);
-        }
-    })
-
-    .service('AuthService', function($http, Backand){
-
-    var self = this;
-    var baseUrl = Backand.getApiUrl() + '/1/objects/';
-    self.appName = '';//CONSTS.appName || '';
-    self.currentUser = {};
-
-    loadUserDetails();
-
-    function loadUserDetails() {
-        self.currentUser.name = Backand.getUsername();
-        if (self.currentUser.name) {
-            getCurrentUserInfo()
-                .then(function (data) {
-                    self.currentUser.details = data;
-                });
-        }
+    service.signup = function(firstName, lastName, email, password, confirmPassword){
+      return Backand.signup(firstName, lastName, email, password, confirmPassword);
     }
 
-    self.getSocialProviders = function () {
-        return Backand.getSocialProviders()
+    service.getUsername = function(){
+      return Backand.user.getUsername();
     };
 
-    self.socialSignIn = function (provider) {
-        return Backand.socialSignIn(provider)
-            .then(function (response) {
-                loadUserDetails();
-                return response;
-            });
-    };
+  });
 
-    self.socialSignUp = function (provider) {
-        return Backand.socialSignUp(provider)
-            .then(function (response) {
-                loadUserDetails();
-                return response;
-            });
-    };
 
-    self.setAppName = function (newAppName) {
-        self.appName = newAppName;
-    };
-
-    self.signIn = function (username, password, appName) {
-        return Backand.signin(username, password, appName)
-            .then(function (response) {
-                loadUserDetails();
-                return response;
-            });
-    };
-
-    self.signUp = function (firstName, lastName, username, password, parameters) {
-        return Backand.signup(firstName, lastName, username, password, password, parameters)
-            .then(function (signUpResponse) {
-
-                if (signUpResponse.data.currentStatus === 1) {
-                    return self.signIn(username, password)
-                        .then(function () {
-                            return signUpResponse;
-                        });
-
-                } else {
-                    return signUpResponse;
-                }
-            });
-    };
-
-    self.changePassword = function (oldPassword, newPassword) {
-        return Backand.changePassword(oldPassword, newPassword)
-    };
-
-    self.requestResetPassword = function (username) {
-        return Backand.requestResetPassword(username, self.appName)
-    };
-
-    self.resetPassword = function (password, token) {
-        return Backand.resetPassword(password, token)
-    };
-
-    self.logout = function () {
-        Backand.signout().then(function () {
-            angular.copy({}, self.currentUser);
-        });
-    };
-
-    function getCurrentUserInfo() {
-        return $http({
-            method: 'GET',
-            url: baseUrl + "users",
-            params: {
-                filter: JSON.stringify([{
-                    fieldName: "email",
-                    operator: "contains",
-                    value: self.currentUser.name
-                }])
-            }
-        }).then(function (response) {
-            if (response.data && response.data.data && response.data.data.length == 1)
-                return response.data.data[0];
-        });
-    }
-
-});

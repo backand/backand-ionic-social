@@ -5,10 +5,6 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controllers', 'SimpleRESTIonic.services'])
 
-    /*   .run(function (, Backand) {
-
-     })
-     */
     .config(function (BackandProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
         // change here to your appName
         BackandProvider.setAppName('ionicstarter');
@@ -74,10 +70,6 @@ angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controll
                 StatusBar.styleLightContent();
             }
 
-
-            var isMobile = !(ionic.Platform.platforms[0] == "browser");
-            Backand.setIsMobile(isMobile);
-            Backand.setRunSignupAfterErrorInSigninSocial(true);
         });
 
         function unauthorized() {
@@ -97,9 +89,6 @@ angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controll
             if (toState.name == 'tab.login') {
                 signout();
             }
-            else if (toState.name != 'tab.login' && Backand.getToken() === undefined) {
-                unauthorized();
-            }
         });
 
-    })
+    });
