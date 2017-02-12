@@ -1,77 +1,40 @@
 <ion-view view-title="Login">
-    <div class="bar bar-subheader">
-      <!-- LIST -->
-      <div class="buttons">
-        <a ng-click="login.signout()" href="" class="cancel-create">sign out - login as {{login.username}}</a>
-        <button class="button button-calm" ng-click="login.anonymousLogin()">Guest login</button>
-      </div>
+  <div class="bar bar-subheader">
+    <!-- LIST -->
+    <div class="buttons">
+        <span ng-if="vm.username"  class="cancel-create">login as {{vm.username}} -
+          <a ng-click="vm.signout()" href="" class="">sign out</a></span>
+      <button class="button button-calm" ng-click="vm.anonymousLogin()">Guest login</button>
     </div>
-    <ion-content class="padding has-subheader">
-      <form ng-submit="login.signin()">
-        <div class="list">
+  </div>
+  <ion-content class="padding has-subheader">
+    <form ng-submit="vm.signin()">
+      <div class="list">
 
-          <label class="item item-input">
-            <input id="email" name="email" type="email" placeholder="Your email" ng-model="login.email">
-          </label>
-          <label class="item item-input">
-            <input id="password" name="password" type="password" placeholder="Your password" ng-model="login.password">
-          </label>
-        </div>
-        <div class="">
-          <button class="button button-block button-stable" type="submit">
-            Login
-          </button>
-        </div>
-        <div class="button-bar">
-          <button class="button button-positive icon-left ion-social-facebook" ng-click="login.socialSignin('facebook')" type="button">
-            Facebook
-          </button>
-          <button class="button button-dark icon-left ion-social-facebook ion-social-github" ng-click="login.socialSignin('github')" type="button">
-            Github
-          </button>
-          <button class="button button-assertive icon-left ion-social-googleplus" ng-click="login.socialSignin('google')" type="button">
-            Google+
-          </button>
-        </div>
-      </form>
-      <h4 style="color:red;" ng-bind="login.error"></h4>
-    </ion-content>
-
-    <!--<ion-content class="padding has-header">-->
-        <!--<div class="bar bar-header">-->
-            <!--<span ng-click="login.signout()" class="cancel-create">sign out - login as {{login.username}}</span>-->
-            <!--<button class="button button-calm" ng-click="login.anonymousLogin()">Guest login</button>-->
-
-        <!--</div>-->
-        <!--<div class="bar bar-subheader">-->
-            <!--<form ng-submit="login.signin()">-->
-                <!--<div class="list">-->
-
-                    <!--<label class="item item-input">-->
-                        <!--<input id="email" name="email" type="email" placeholder="Your email" ng-model="login.email">-->
-                    <!--</label>-->
-                    <!--<label class="item item-input">-->
-                        <!--<input id="password" name="password" type="password" placeholder="Your password" ng-model="login.password">-->
-                    <!--</label>-->
-                <!--</div>-->
-                <!--<div class="">-->
-                    <!--<button class="button button-block button-stable" type="submit">-->
-                        <!--Login-->
-                    <!--</button>-->
-                <!--</div>-->
-                <!--<div class="button-bar">-->
-                    <!--<button class="button button-positive icon-left ion-social-facebook" ng-click="login.socialSignin('facebook')" type="button">-->
-                        <!--Facebook-->
-                    <!--</button>-->
-                    <!--<button class="button button-dark icon-left ion-social-facebook ion-social-github" ng-click="login.socialSignin('github')" type="button">-->
-                        <!--Github-->
-                    <!--</button>-->
-                    <!--<button class="button button-assertive icon-left ion-social-googleplus" ng-click="login.socialSignin('google')" type="button">-->
-                        <!--Google+-->
-                    <!--</button>-->
-                <!--</div>-->
-            <!--</form>-->
-                <!--<h4 style="color:red;" ng-bind="login.error"></h4>-->
-        <!--</div>-->
-    <!--</ion-content>-->
+        <label class="item item-input">
+          <input id="email" name="email" type="email" placeholder="Your email" ng-model="vm.email">
+        </label>
+        <label class="item item-input">
+          <input id="password" name="password" type="password" placeholder="Your password" ng-model="vm.password">
+        </label>
+      </div>
+      <div class="">
+        <button class="button button-block button-stable" type="submit">
+          Login
+        </button>
+      </div>
+      <div class="button-bar">
+        <button class="button button-positive icon-left ion-social-facebook" ng-click="vm.socialSignin('facebook')" type="button">
+          Facebook
+        </button>
+        <button class="button button-dark icon-left ion-social-facebook ion-social-github" ng-click="vm.socialSignin('github')" type="button">
+          Github
+        </button>
+        <button class="button button-assertive icon-left ion-social-googleplus" ng-click="vm.socialSignin('google')" type="button">
+          Google+
+        </button>
+      </div>
+    </form>
+    <h4 style="color:red;" ng-bind="vm.error"></h4>
+  </ion-content>
 </ion-view>
