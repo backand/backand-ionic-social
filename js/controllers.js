@@ -6,11 +6,11 @@ angular.module('SimpleRESTIonic.controllers', [])
 
       function signin() {
         LoginService.signin(vm.email, vm.password)
-            .then(function () {
-              onLogin();
-            }, function (error) {
-              console.log(error)
-            })
+          .then(function () {
+            onLogin();
+          }, function (error) {
+            console.log(error)
+          })
       }
 
       function anonymousLogin() {
@@ -22,39 +22,39 @@ angular.module('SimpleRESTIonic.controllers', [])
         $rootScope.$broadcast('authorized');
         $state.go('tab.dashboard');
         LoginService.getUsername()
-            .then(function(response){
-              vm.username = username || response.data;
-            })
+          .then(function (response) {
+            vm.username = username || response.data;
+          })
       }
 
       function signout() {
         LoginService.signout()
-            .then(function () {
-              //$state.go('tab.login');
-              $rootScope.$broadcast('logout');
-              $state.reload();
-              vm.username = '';
-            })
+          .then(function () {
+            //$state.go('tab.login');
+            $rootScope.$broadcast('logout');
+            $state.reload();
+            vm.username = '';
+          })
       }
 
       function socialSignin(provider) {
         LoginService.socialSignin(provider)
-            .then(onValidLogin, onErrorInLogin);
+          .then(onValidLogin, onErrorInLogin);
 
       }
 
       function socialSignup(provider) {
         LoginService.socialSignup(provider)
-            .then(onValidLogin, onErrorInLogin);
+          .then(onValidLogin, onErrorInLogin);
 
       }
 
-      var onValidLogin = function(response){
+      var onValidLogin = function (response) {
         onLogin();
         vm.username = response.data || vm.username;
       };
 
-      var onErrorInLogin = function(rejection){
+      var onErrorInLogin = function (rejection) {
         vm.error = rejection.data;
         $rootScope.$broadcast('logout');
 
@@ -78,21 +78,21 @@ angular.module('SimpleRESTIonic.controllers', [])
 
       vm.signup = signUp;
 
-      function signUp(){
+      function signUp() {
         vm.errorMessage = '';
 
         LoginService.signup(vm.firstName, vm.lastName, vm.email, vm.password, vm.again)
-            .then(function (response) {
-              // success
-              onLogin();
-            }, function (reason) {
-              if(reason.data.error_description !== undefined){
-                vm.errorMessage = reason.data.error_description;
-              }
-              else{
-                vm.errorMessage = reason.data;
-              }
-            });
+          .then(function (response) {
+            // success
+            onLogin();
+          }, function (reason) {
+            if (reason.data.error_description !== undefined) {
+              vm.errorMessage = reason.data.error_description;
+            }
+            else {
+              vm.errorMessage = reason.data;
+            }
+          });
       }
 
 
@@ -103,7 +103,7 @@ angular.module('SimpleRESTIonic.controllers', [])
 
 
       vm.email = '';
-      vm.password ='';
+      vm.password = '';
       vm.again = '';
       vm.firstName = '';
       vm.lastName = '';
@@ -113,15 +113,17 @@ angular.module('SimpleRESTIonic.controllers', [])
     .controller('DashboardCtrl', function (ItemsModel, $rootScope) {
       var vm = this;
 
+
+
       function goToBackand() {
         window.location = 'http://docs.backand.com';
       }
 
       function getAll() {
         ItemsModel.all()
-            .then(function (result) {
-              vm.data = result.data;
-            });
+          .then(function (result) {
+            vm.data = result.data;
+          });
       }
 
       function clearData() {
@@ -130,26 +132,23 @@ angular.module('SimpleRESTIonic.controllers', [])
 
       function create(object) {
         ItemsModel.create(object)
-            .then(function (result) {
-              cancelCreate();
-              getAll();
-            });
+          .then(function (result) {
+            cancelCreate();
+          });
       }
 
       function update(object) {
         ItemsModel.update(object.id, object)
-            .then(function (result) {
-              cancelEditing();
-              getAll();
-            });
+          .then(function (result) {
+            cancelEditing();
+          });
       }
 
       function deleteObject(id) {
         ItemsModel.delete(id)
-            .then(function (result) {
-              cancelEditing();
-              getAll();
-            });
+          .then(function (result) {
+            cancelEditing();
+          });
       }
 
       function initCreateForm() {
@@ -191,6 +190,11 @@ angular.module('SimpleRESTIonic.controllers', [])
       vm.isAuthorized = false;
 
       $rootScope.$on('authorized', function () {
+        vm.isAuthorized = true;
+        getAll();
+      });
+
+      $rootScope.$on('items_updated', function () {
         vm.isAuthorized = true;
         getAll();
       });

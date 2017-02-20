@@ -14,41 +14,43 @@ angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controll
       // token is for anonymous login. see http://docs.backand.com/en/latest/apidocs/security/index.html#anonymous-access
       BackandProvider.setAnonymousToken('8379a2c8-15e5-4acf-a17f-29721b2a44c3');
 
+      BackandProvider.runSocket(true);
+
       $stateProvider
       // setup an abstract state for the tabs directive
-          .state('tab', {
-            url: '/tabs',
-            abstract: true,
-            templateUrl: 'templates/tabs.html'
-          })
-          .state('tab.dashboard', {
-            url: '/dashboard',
-            views: {
-              'tab-dashboard': {
-                templateUrl: 'templates/tab-dashboard.html',
-                controller: 'DashboardCtrl as vm'
-              }
+        .state('tab', {
+          url: '/tabs',
+          abstract: true,
+          templateUrl: 'templates/tabs.html'
+        })
+        .state('tab.dashboard', {
+          url: '/dashboard',
+          views: {
+            'tab-dashboard': {
+              templateUrl: 'templates/tab-dashboard.html',
+              controller: 'DashboardCtrl as vm'
             }
-          })
-          .state('tab.login', {
-            url: '/login',
-            views: {
-              'tab-login': {
-                templateUrl: 'templates/tab-login.html',
-                controller: 'LoginCtrl as vm'
-              }
+          }
+        })
+        .state('tab.login', {
+          url: '/login',
+          views: {
+            'tab-login': {
+              templateUrl: 'templates/tab-login.html',
+              controller: 'LoginCtrl as vm'
             }
-          })
-          .state('tab.signup', {
-                url: '/signup',
-                views: {
-                  'tab-signup': {
-                    templateUrl: 'templates/tab-signup.html',
-                    controller: 'SignUpCtrl as vm'
-                  }
+          }
+        })
+        .state('tab.signup', {
+              url: '/signup',
+              views: {
+                'tab-signup': {
+                  templateUrl: 'templates/tab-signup.html',
+                  controller: 'SignUpCtrl as vm'
                 }
               }
-          );
+            }
+        );
 
       $urlRouterProvider.otherwise('/tabs/login');
       $httpProvider.interceptors.push('APIInterceptor');

@@ -11,7 +11,7 @@ angular.module('SimpleRESTIonic.services', [])
       };
     })
 
-    .service('ItemsModel', function ($http, Backand) {
+    .service('ItemsModel', function ($rootScope, Backand) {
       var service = this,
           objectName = 'items';
 
@@ -34,6 +34,13 @@ angular.module('SimpleRESTIonic.services', [])
       service.delete = function (id) {
         return Backand.object.remove(objectName, id);
       };
+
+      Backand.on('items_updated', function (data) {
+        //Get the 'items' object that have changed
+        console.log(data);
+        $rootScope.$broadcast('items_updated')
+      });
+
     })
 
     .service('LoginService', function (Backand) {
