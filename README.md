@@ -9,6 +9,7 @@ Create mobile application with [ionic](http://www.ionicframework.com) and [backa
 2 - Install Backand
 
     bower install backand-angular1-sdk
+    bower install socket.io-client
 
 3 - Install [InAppBrowser](https://cordova.apache.org/docs/en/3.0.0/cordova/inappbrowser/inappbrowser.html) cordova plugin.
     
