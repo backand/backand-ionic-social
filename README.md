@@ -32,10 +32,12 @@ The app should now be available in your browser. To run the app on another platf
     
 ## Main Functionality
 
-The application comes with a full server-side app in Backand, ready to go. It also provides full CRUD functionality via a RESTful API for each object. It also demonstrates the two primary authentication methods that we offer:
+The application comes with a full server-side app in Backand, ready to go. Here's a brief overview of the functionality provided in this starter:
 
-* Backand User Management - You can register and authenticate new users in the Signup tab
-* Social Media Authentication - You can use leading social media applications (such as Facebook, Google, and GitHub) to register and authenticate your users
+* **Backand User Management** - You can register new users in the Signup tab. Authenticate these users in the "Login" tab
+* **Social Media Authentication** - You can use leading social media applications (such as Facebook, Google, and GitHub) to register and authenticate your users. Social media accounts don't need to have a separate Signup page - that process is handled by each respective provider
+* **Object CRUD functionality** - The starter app includes a data service that implements full CRUD functionality for your app's objects. Simply work with the UI on the main tab to see the SDK in action
+* **Real-time communications** - We've connected to Backand's real-time communications architecture in this demo. All changes to item entries in the app result in a socket event that outputs the changes to the console - open the developer console, make a change to an item, and you'll see the real-time events in action!
 
 
 ## Setting up your own realtime Backand application
