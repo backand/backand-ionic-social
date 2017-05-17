@@ -1,32 +1,39 @@
 # backand-ionic-social
 Use this starter to create a mobile applicaiton with [ionic](http://www.ionicframework.com) and [backand](http://www.backand.com) built-in.
+**NOTE: Compatible with Ionic 3.1.2**
+
+Due to recent changes of Ionic CLI it does no support creating an app from a GitHub repo. Hence, you will need to clone or download these starter and copy from the starter.
 
 # Getting Started
 To run the starter app, follow these easy steps:
 
 1 - Download the archive and run ionic start
 
-    ionic start myApp https://github.com/backand/backand-ionic-social
+    ionic start myApp tabs --type ionic1
     cd myApp
 
-2 - Install the Backand SDK and Socket.io
+2 - Replace these folders from the starter: `js`, `css`, and `templates` 
+
+4 - Replace `index.html` from the starter
+
+4 - Install the Backand SDK and Socket.io
 
     bower install backand-angular1-sdk
     bower install socket.io-client
 
-3 - Install the [InAppBrowser](https://cordova.apache.org/docs/en/3.0.0/cordova/inappbrowser/inappbrowser.html) cordova plugin
+5 - Install the [InAppBrowser](https://cordova.apache.org/docs/en/3.0.0/cordova/inappbrowser/inappbrowser.html) cordova plugin
     
-    cordova plugin add cordova-plugin-inappbrowser
+    ionic cordova plugin add cordova-plugin-inappbrowser
     
-    ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git
+    ionic cordova plugin add https://github.com/apache/cordova-plugin-whitelist.git
 
-4 - Run with ionic serve function
+6 - Run with ionic serve function
 
     ionic serve
     
 The app should now be available in your browser. To run the app on another platform (Android/iOS), use the following commands:
 
-    cordova platform add <platform>
+    ioic cordova platform add <platform>
     ionic run <platform>
     
     
