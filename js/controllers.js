@@ -1,6 +1,6 @@
 angular.module('SimpleRESTIonic.controllers', [])
 
-    .controller('LoginCtrl', function ($state, $rootScope, LoginService) {
+    .controller('LoginCtrl', function ($state, $rootScope, LoginService, $cordovaFacebook, $cordovaGooglePlus, Facebook) {
 
       var vm = this;
 
@@ -59,6 +59,66 @@ angular.module('SimpleRESTIonic.controllers', [])
         $rootScope.$broadcast('logout');
 
       };
+
+      vm.inAppSocialSignin = function(provider) {
+        switch(provider)
+        {
+          case 'facebook':
+            $cordovaFacebook.login(["public_profile", "email", "user_friends"])
+            .then(function(success) {
+              console.log('connected to facebook');
+              LoginService.socialSigninWithToken('facebook', res.authResponse.accessToken).then(
+                function(resBackand){
+                  console.log('social', resBackand);
+                }, 
+                function(errBackand) {
+                  console.log('err', errBackand);
+                }
+              );
+            }, function (error) {
+              console.log('error');
+              console.log(err);
+            });
+          break;
+
+          case 'google':
+            $cordovaGooglePlus.login({})
+            .then(function(res) {
+              console.log('connected to google');
+              LoginService.socialSigninWithToken('google', res.accessToken).then(
+                function(resBackand){
+                  console.log('social', resBackand);
+                }, 
+                function(errBackand) {
+                  console.log('err', errBackand);
+                }
+              );
+            }, function(err) {
+              console.log('error');
+              console.log(err);
+            });
+          break;
+        }
+
+      }
+
+      vm.socialWeb = function(provider) {
+        switch(provider)
+        {
+          case 'facebook':
+            Facebook.login(function(response) {
+              LoginService.socialSigninWithToken('facebook', response.authResponse.accessToken).then(
+                function(resBackand){
+                  console.log('social', resBackand);
+                }, 
+                function(errBackand) {
+                  console.log('err', errBackand);
+                }
+              );      
+            });
+          break;
+        }
+      }
 
 
       vm.username = '';

@@ -37,4 +37,25 @@
     </form>
     <h4 style="color:red;" ng-bind="vm.error"></h4>
   </ion-content>
+
+  <ion-content class="padding has-subheader">  
+      In App Social
+      <div class="button-bar">
+        <button class="button button-positive icon-left ion-social-facebook" ng-click="vm.inAppSocialSignin('facebook')" type="button">
+          Facebook
+        </button>
+        <button class="button button-assertive icon-left ion-social-googleplus" ng-click="vm.inAppSocialSignin('google')" type="button">
+          Google+
+        </button>
+      </div>
+  </ion-content>
+
+  <ion-content class="padding has-subheader">  
+      Social Web   
+      <div class="button-bar">
+        <button class="button button-positive icon-left ion-social-facebook" ng-click="vm.socialWeb('facebook')" type="button">
+          Facebook
+        </button>
+      </div>
+  </ion-content>
 </ion-view>

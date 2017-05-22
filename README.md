@@ -101,3 +101,39 @@ While the basic app is useful for demonstration purposes, your app will most lik
       BackandProvider.setAnonymousToken('Your-Anonymous-Token');
       
 And with that, your Ionic app is now wired up to your own Backand app!
+
+# In App Social Login 
+
+In App social login is intended to use the native social SDK of Faceboook or Google. For Google this is due to recent restrictions in Google that prevent using the Signup with Google through web views. 
+
+In the `login` screen we label this functionality as **In App Social**. See our code.
+
+Install `ionic-native`:
+
+    bower install ionic-native --save
+
+## Google 
+
+Install [Cordova Google Sign-In plugin](https://github.com/EddyVerbruggen/cordova-plugin-googleplus)
+
+## Facebook
+
+Install [Facebook Connect plugin](http://ngcordova.com/docs/plugins/facebook/)
+
+# Ionic Web App for Facebook Sharing
+
+When an Ionic web app is shared in Facebook feed, the usual Backand social signup with Facebook will not work. 
+
+1. Install [angular-facebook](https://github.com/Ciul/angular-facebook) with:
+    
+    bower install angular-facebook --save
+
+2. Detect this case in your code with:
+
+    function isFacebookApp() {
+       var ua = navigator.userAgent || navigator.vendor || window.opera;
+       return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+    }
+
+3. Use the code labeled **Social Web** in `login` screen.
+

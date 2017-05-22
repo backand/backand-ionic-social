@@ -76,4 +76,8 @@ angular.module('SimpleRESTIonic.services', [])
         return Backand.user.getUsername();
       };
 
+      service.socialSigninWithToken= function(provider, accessToken){
+        return Backand.signinWithToken(provider, accessToken);
+      }
+
     });

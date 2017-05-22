@@ -3,9 +3,11 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'SimpleRESTIonic' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controllers', 'SimpleRESTIonic.services'])
+angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controllers', 'SimpleRESTIonic.services', 'ionic.native', 'facebook'])
 
-    .config(function (BackandProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
+    .config(function (BackandProvider, $stateProvider, $urlRouterProvider, $httpProvider, FacebookProvider) {
+
+
       // change here to your appName
       BackandProvider.setAppName('bkndionicstarter');
 
@@ -15,6 +17,9 @@ angular.module('SimpleRESTIonic', ['ionic', 'backand', 'SimpleRESTIonic.controll
       BackandProvider.setAnonymousToken('8379a2c8-15e5-4acf-a17f-29721b2a44c3');
 
       BackandProvider.runSocket(true);
+
+      // if ionic web app to be shared in facebook feed
+      FacebookProvider.init('YOUR_APP_ID');
 
       $stateProvider
       // setup an abstract state for the tabs directive
