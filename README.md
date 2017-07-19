@@ -16,10 +16,12 @@ To run the starter app, follow these easy steps:
 
 4 - Replace `index.html` from the starter
 
-4 - Install the Backand SDK and Socket.io
+4 - Install the Backand SDK, Socket.io, and ngCordova
 
     bower install backand-angular1-sdk
     bower install socket.io-client
+    bower install ngCordova
+    bower install angular-facebook
 
 5 - Install the [InAppBrowser](https://cordova.apache.org/docs/en/3.0.0/cordova/inappbrowser/inappbrowser.html) cordova plugin
     
